@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import MainInput from "./components/UI/input/MainInput";
+import MainButton from "./components/UI/button/MainButton";
+import PostItem from "./components/PostItem";
+import './style/App.css';
+
 
 function App() {
+  const [onePost, setOnePost] = useState({title: '', body: ''})
+  const [posts, setPosts] = useState([{title: '"Пример названия"', body: '"Пример описания"'}])
+
+  const addPost = (e) => {
+    e.preventDefault()
+    setPosts([...posts, onePost])
+    setOnePost({title: '', body: ''})
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form className="inputForm">
+        <MainInput
+          value = {onePost.title}
+          placeholder = {'Введите название'}
+          onChange = {e => setOnePost({...onePost, title: e.target.value})}
+        />
+        <MainInput
+          value = {onePost.body}
+          placeholder = {'Введите описание'}
+          onChange = {e => setOnePost({...onePost, body: e.target.value})}
+        />
+        <MainButton onClick={addPost}>Добавить</MainButton>
+      </form>
+      <PostItem posts={posts}/>
     </div>
   );
 }

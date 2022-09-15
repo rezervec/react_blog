@@ -1,0 +1,13 @@
+.MainButton {
+  width: 50%;
+  padding: 10px;
+  align-self: center;
+  background-color:rgb(133, 218, 255);
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.MainButton:hover {
+  background-color: rgb(87, 134, 255);
+  border-radius: 5px;
+}
