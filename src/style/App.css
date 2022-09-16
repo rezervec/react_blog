@@ -1,5 +1,10 @@
 body {padding-top: 100px;}
 
+.App {
+  max-width: 800px;
+  margin: auto;
+}
+
 .inputForm {
   display: flex;
   flex-direction: column;
@@ -17,9 +22,8 @@ body {padding-top: 100px;}
   display: grid;
   grid-template-columns: 4fr 5fr 1fr;
   justify-items: center;
-  align-items: center; 
+  align-items: center;
   margin: 15px auto;
-  max-width: 800px;
   border: solid 1px;
   background-color: rgb(234, 252, 255);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
