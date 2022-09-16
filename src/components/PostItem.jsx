@@ -1,14 +1,18 @@
 import React from "react";
 
-const PostItem = ({...props}) => {
+const PostItem = ({posts, deletePost}) => {
 
   return (
     <div>
-    {props.posts.map((post, index) =>
-      <div className="postItem" key={index}>
+    {/* выводим каждый элемент массива */}
+    {posts.map((post, index) =>
+      <div className="postItem" key={post.id}>
         <h3>{post.title}</h3>
         <p>{post.body}</p>
-        <b>id: {index}</b>
+        {/* отображаем индекс чтобы на front-е выглядело читабельнее    ! BEFORE RELEASE !    */}
+        <b># {index+1}</b>
+        {/* при нажатии срабатывает callback-функция, в которую передаём статью */}
+        <button className='del-btn' onClick={() => deletePost(post)}>Удалить</button>
       </div>
     )}
     </div>

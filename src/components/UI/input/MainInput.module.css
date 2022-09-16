@@ -1,8 +1,7 @@
 .MainInput {
-  background-color:rgb(159, 255, 255);
+  background-color:#aaf6f9;
+  border: solid 2px #54e6de;
   border-radius: 5px;
-  color:darkblue;
   font-size: large;
-  font-weight: bold;
   height: 30px;
 }

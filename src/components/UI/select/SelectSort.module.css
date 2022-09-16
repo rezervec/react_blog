@@ -1,6 +1,12 @@
 .SelectSort {
-    background-color: rgb(205, 227, 255);
+    background-color: #49ccfc;
     padding: 7px;
     border-radius: 4px;
     font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  .SelectSort:hover {
+    background-color: #00bbff;
   }

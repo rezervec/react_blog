@@ -6,16 +6,24 @@ import './style/App.css';
 
 
 function App() {
+  // в posts будем помещать все наши статьи
   const [posts, setPosts] = useState([
-    {title: 'Видеокарта', body: 'Графический ускоритель. Устройство, преобразующее графический образ.' },
-    {title: 'Альфа-канал', body: 'Если кратко, то, комбинирование изображения с фоном.' },
-    {title: 'Блок питания', body: 'Даёт наприжение в том количестве, котором требуется компьютеру.' }
+    {id: '1', title: 'Видеокарта', body: 'Графический ускоритель. Устройство, преобразующее графический образ.' },
+    {id: '2', title: 'Альфа-канал', body: 'Если кратко, то, комбинирование изображения с фоном.' },
+    {id: '3', title: 'Блок питания', body: 'Даёт наприжение в том количестве, котором требуется компьютеру.' }
   ])
 
+  // selectedSort будет передавать состояние выпадающего списка сортировки
   const [selectedSort, setSelectedSort] = useState('')
 
+  // при создании статьи переписываем в posts все имеющиеся статьи и добавляем новую
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+  }
+
+  // переписываем в posts все имеющиеся статьи, кроме тех чей id не равен id переданного элемента 
+  const deletePost = (post) => {
+    setPosts([...posts].filter(p => p.id !== post.id))
   }
 
   const SortSelect = (select) => {
@@ -36,7 +44,12 @@ function App() {
           {value: 'body', name: 'По описанию'}
         ]}
       />
-      <PostItem posts={posts}/>
+      {/* если статьи есть, выводим их */}
+      {
+      posts.length
+        ? <PostItem posts={posts} deletePost={deletePost}/>
+        : <h3>Статей нет</h3>
+      }
     </div>
   );
 }

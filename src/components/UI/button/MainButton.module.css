@@ -2,12 +2,13 @@
   width: 50%;
   padding: 10px;
   align-self: center;
-  background-color:rgb(133, 218, 255);
+  background-color:#00e1ff;
+  border: solid 1px #008770;
   cursor: pointer;
   transition: .3s ease;
 }
 
 .MainButton:hover {
-  background-color: rgb(87, 134, 255);
+  background-color: #71ea93;
   border-radius: 5px;
 }

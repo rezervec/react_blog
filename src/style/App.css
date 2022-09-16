@@ -1,4 +1,10 @@
-body {padding-top: 100px;}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@100;400;700&display=swap');
+*{font-family: 'Fira Sans Condensed', sans-serif;}
+
+body {
+  background-color: #282c34;
+  padding-top: 100px;
+}
 
 .App {
   max-width: 800px;
@@ -14,17 +20,26 @@ body {padding-top: 100px;}
   padding: 40px;
   border: solid 2px;
   border-radius: 10px;
-  background-color: rgb(165, 233, 255);
+  background-color: #146071;
   box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.6);
 }
 
 .postItem {
   display: grid;
-  grid-template-columns: 4fr 5fr 1fr;
+  grid-template-columns: 4fr 7fr 1fr 2fr;
   justify-items: center;
   align-items: center;
   margin: 15px auto;
   border: solid 1px;
-  background-color: rgb(234, 252, 255);
+  background-color: #6ec8c8;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
+
+.del-btn {
+  background-color: #00e1ff;
+  border: solid 1px rgb(23, 160, 151);
+  cursor: pointer;
+  transition: .2s;
+  height: 30px;
+}
+.del-btn:hover {background-color: rgb(227, 145, 115);}
