@@ -33,6 +33,13 @@ body {
   border: solid 1px;
   background-color: #6ec8c8;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+  padding: 2px;
+  text-align: center;
+}
+
+.postItem p {
+  border-left: solid 2px #14607193;
+  border-right: solid 2px #14607193;
 }
 
 .del-btn {
