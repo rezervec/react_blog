@@ -1,6 +1,10 @@
 import React from "react";
 
 const PostItem = ({posts, deletePost}) => {
+  if (!posts.length)
+    {
+      return <div className="noPosts">Статей нет.</div>
+    }
 
   return (
     <div>

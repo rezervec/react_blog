@@ -42,6 +42,13 @@ body {
   border-right: solid 2px #14607193;
 }
 
+.noPosts {
+  color: snow;
+  text-align: center;
+  font-size: 25px;
+  margin-top: 20px;
+}
+
 .del-btn {
   background-color: #00e1ff;
   border: solid 1px rgb(23, 160, 151);

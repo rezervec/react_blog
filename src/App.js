@@ -4,6 +4,7 @@ import CreatePostForm from "./components/CreatePostForm";
 import PostFilter from "./components/PostFilter";
 import PostItem from "./components/PostItem";
 import Loader from "./components/UI/loader/Loader";
+import { useFetch } from "./hooks/useFetch";
 import { usePosts } from "./hooks/usePosts";
 import './style/App.css';
 
@@ -15,28 +16,20 @@ function App() {
     // {id: '2', title: 'Альфа-канал', body: 'Если кратко, то, комбинирует изображения с фоном.' },
     // {id: '3', title: 'Блок питания', body: 'Даёт наприжение в том количестве, котором требуется компьютеру.' }
   ])
-
-  const [isPostsLoading, setIsPostsLoading] = useState(false)
-
-  // наполняем posts данными из API
-  const fetchPosts = async () => {
-    // обозначем что статьи начали загружаться
-    setIsPostsLoading(true)
-    // делаем искусственную задержку получения данных    ! BEFORE RELEASE !    
-    setTimeout(async () => {
-      const postsData = await PostData.getPosts()
-      setPosts(postsData)
-      setIsPostsLoading(false)
-    }, 1000)
-  }
-
-  // пользуемся хуком чтобы наполнить массив статьями 1 раз
-  useEffect(() => {
-    fetchPosts()
-  }, [])
-
   // filter.select отвечает за состояние нашего селектора сортировки, а filter.input за значение в поисковой строке
   const[filter, setFilter] = useState({select:'', input: ''})
+
+  // Вызываем кастомный хук, который запишет промис с данными статей в setPosts
+  const [fetchPosts, isPostsLoading, postError] = useFetch(async () => {
+    const postsData = await PostData.getPosts()
+    setPosts(postsData)
+  })
+
+  // пользуемся хуком чтобы наполнить массив статьями единожды
+  useEffect(() => {
+    // в isPostsLoading запишется состояние промиса, в postError ошибки
+    fetchPosts()
+  }, [])
 
   // передаём в наш хук посты и значения всех сортировщиков, записываем отсортированный массив
   const sortPostsSelectAndInput = usePosts(posts, filter.select, filter.input)
@@ -58,6 +51,10 @@ function App() {
         filter={filter}
         setFilter={setFilter}
       />
+      {/* если при передаче промиса возникнет ошибка, выводим её */}
+      {postError &&
+        <div><b>Возникла ошибка:</b> ${postError}</div>
+      }
       {
       isPostsLoading
         ? <div><Loader/></div>
