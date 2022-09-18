@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import CreatePostForm from "./components/CreatePostForm";
+import PostFilter from "./components/PostFilter";
 import PostItem from "./components/PostItem";
-import MainInput from "./components/UI/input/MainInput";
-import SelectSort from "./components/UI/select/SelectSort";
+import { usePosts } from "./hooks/usePosts";
 import './style/App.css';
 
 
@@ -14,24 +14,25 @@ function App() {
     {id: '3', title: 'Блок питания', body: 'Даёт наприжение в том количестве, котором требуется компьютеру.' }
   ])
 
-  // selectedSort будет передавать состояние выпадающего списка сортировки
-  const [selectedSort, setSelectedSort] = useState('')
-  const [searchField, setSearchField] = useState('')
+  // filter.select отвечает за состояние нашего селектора сортировки, а filter.input за значение в поисковой строке
+  const[filter, setFilter] = useState({select:'', input: ''})
 
   // сортируем статьи по значению выпадающего списка
   // sortPostsSelect перезапишется при изменении значения дропдауна или при изменении массива статей
-  const sortPostsSelect = useMemo(() => {
-    if (selectedSort) {
-      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
-    }
-    return posts
-  }, [posts, selectedSort])
+  // const sortPostsSelect = useMemo(() => {
+  //   if (filter.select) {
+  //     return [...posts].sort((a, b) => a[filter.select].localeCompare(b[filter.select]))
+  //   }
+  //   return posts
+  // }, [posts, filter.select])
 
   // сортируем статьи по значению выпадающего списка и поисковой строки
-  const SortPostsSelectAndSearch = useMemo(() => {
+  // const SortPostsSelectAndSearch = useMemo(() => {
     // выводим статьи где есть совпадение со значением из поисковой строки, все значения сравниваем в нижнем регистре
-    return sortPostsSelect.filter(post => post.title.toLowerCase().includes(searchField.toLowerCase()))
-  }, [sortPostsSelect, searchField])
+  //   return sortPostsSelect.filter(post => post.title.toLowerCase().includes(filter.input.toLowerCase()))
+  // }, [sortPostsSelect, filter.input])
+
+  const sortPostsSelectAndInput = usePosts(posts, filter.select, filter.input)
 
   // при создании статьи переписываем в posts все имеющиеся статьи и добавляем новую
   const createPost = (newPost) => {
@@ -43,30 +44,17 @@ function App() {
     setPosts([...posts].filter(p => p.id !== post.id))
   }
 
-  const SortSelect = (select) => {
-    setSelectedSort(select)
-  }
-
   return (
     <div className="App">
       <CreatePostForm  createPost={createPost}/>
-      <SelectSort
-        value={selectedSort}
-        SortSelect = {SortSelect}
-        options = {[
-          {value: 'title', name: 'По названию'},
-          {value: 'body', name: 'По описанию'}
-        ]}
-      />
-      <MainInput
-        placeholder='Поиск...'
-        value={searchField}
-        onChange = {e => setSearchField(e.target.value)}
+      <PostFilter
+        filter={filter}
+        setFilter={setFilter}
       />
       {/* если статьи есть, выводим их */}
       {
       posts.length
-        ? <PostItem posts={SortPostsSelectAndSearch} deletePost={deletePost}/>
+        ? <PostItem posts={sortPostsSelectAndInput} deletePost={deletePost}/>
         : <h3>Статей нет</h3>
       }
     </div>
