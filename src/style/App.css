@@ -88,4 +88,9 @@ body {
   background-color: rgb(0, 251, 255);
   color: black;
   font-weight: bold;
+  transform: translate(0, -5px);
+}
+.itemPagination_active:hover {
+  cursor: default;
+  background-color: rgb(0, 251, 255);
 }

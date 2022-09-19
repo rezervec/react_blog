@@ -1,6 +1,6 @@
 .loader{
   left: 50%;
-  transform: translate(-180%, 50px);
+  transform: translate(-180%, 90px);
   animation: loading 1s infinite linear;
 }
 

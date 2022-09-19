@@ -1,0 +1,12 @@
+.navbar {
+  display: flex;
+  text-decoration: none;
+  list-style: none;
+  gap: 20px;
+  color: snow;
+}
+
+.navbar li {
+  background-color: aquamarine;
+  padding: 10px;
+}
