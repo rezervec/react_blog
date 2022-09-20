@@ -1,12 +1,20 @@
 .navbar {
   display: flex;
+  max-width: 800px;
+  margin: 20px auto;
+  justify-content: end;
   text-decoration: none;
   list-style: none;
   gap: 20px;
   color: snow;
+  text-transform: uppercase;
 }
 
 .navbar li {
   background-color: aquamarine;
   padding: 10px;
+  transition: .3s;
+}
+.navbar li:hover {
+  background-color: azure;
 }
