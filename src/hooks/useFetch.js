@@ -17,7 +17,7 @@ export const useFetch = (callback) => {
       setTimeout(async () => {
         // обновляем соостояние на "завершено"
         setIsLoading(false)
-      }, 1000)
+      }, 400)
     }
   }
 

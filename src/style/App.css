@@ -50,13 +50,28 @@ body {
 }
 
 .del-btn {
-  background-color: #00e1ff;
+  background-color: #0084e2;
   border: solid 1px rgb(23, 160, 151);
   cursor: pointer;
   transition: .2s;
   height: 30px;
 }
 .del-btn:hover {background-color: rgb(227, 145, 115);}
+
+.read-btn {
+  background-color: #00e1ff;
+  border: solid 1px rgb(23, 160, 151);
+  cursor: pointer;
+  transition: .2s;
+  height: 30px;
+}
+.read-btn:hover {background-color: rgb(115, 227, 216);}
+
+.del-read_btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
 .postPagination {
   display: flex;
