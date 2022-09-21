@@ -2,7 +2,7 @@
   display: flex;
   max-width: 800px;
   margin: 20px auto;
-  justify-content: end;
+  justify-content: flex-end;
   text-decoration: none;
   list-style: none;
   gap: 20px;
@@ -16,5 +16,16 @@
   transition: .3s;
 }
 .navbar li:hover {
+  background-color: azure;
+}
+
+.navbar button {
+  background-color: rgb(130, 204, 179);
+  padding: 10px;
+  margin-left: 15px;
+  text-transform: uppercase;
+  transition: .3s;
+}
+.navbar button:hover {
   background-color: azure;
 }

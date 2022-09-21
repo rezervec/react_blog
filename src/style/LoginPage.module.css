@@ -1,0 +1,7 @@
+.loginPage {
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  gap: 30px;
+}
