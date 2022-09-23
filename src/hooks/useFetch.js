@@ -6,7 +6,7 @@ export const useFetch = (callback) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const fetchPosts = async () => {
+  const fetchData = async () => {
     try {
       setIsLoading(true)
       await callback()
@@ -21,5 +21,5 @@ export const useFetch = (callback) => {
     }
   }
 
-  return [fetchPosts, isLoading, error]
+  return [fetchData, isLoading, error]
 }

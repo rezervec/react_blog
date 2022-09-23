@@ -5,8 +5,11 @@ import PostFilter from "../components/PostFilter";
 import PostItem from "../components/PostItem";
 import Pagination from "../components/UI/pagination/Pagination";
 import { usePosts } from "../hooks/usePosts";
-import { createPost, deletePost } from "../store/postReducer" 
+import { createPostAction, deletePostAction } from "../store/postReducer" 
 import { fetchPosts } from "../actions/fetchAPI";
+import { useFetch } from "../hooks/useFetch";
+import Loader from "../components/UI/loader/Loader";
+import { pagesCounter } from "../utils/pagePagination";
 
 
 function Posts() {
@@ -18,22 +21,28 @@ function Posts() {
   // filter.select отвечает за состояние нашего селектора сортировки, а filter.input за значение в поисковой строке
   const[filter, setFilter] = useState({select:'', input: ''})  
 
+  const [fetchPostsData, isPostsLoading, postsErrors] = useFetch(() => {
+    const response = dispatch(fetchPosts(postsLimit, activePage))
+    const allPosts = response.headers['x-total-count']
+    setPagesAmount(pagesCounter(allPosts, postsLimit))
+  })
+
   const dispatch = useDispatch()
-  const posts = useSelector(post => post.posts)
+  const posts = useSelector(post => post.posts.posts)
 
   useEffect(() => {
-    dispatch(fetchPosts(postsLimit, activePage))
+    fetchPostsData()
   }, [activePage])
 
   // передаём в наш хук посты и значения всех сортировщиков, записываем отсортированный массив
   const sortPostsSelectAndInput = usePosts(posts, filter.select, filter.input)
 
   const addPost = (newPost) => {
-    dispatch(createPost(newPost))
+    dispatch(createPostAction(newPost))
   }
 
   const delPost = (post) => {
-    dispatch(deletePost(post.id))
+    dispatch(deletePostAction(post.id))
   }
 
   return (
@@ -43,7 +52,13 @@ function Posts() {
         filter={filter}
         setFilter={setFilter}
       />
-      <PostItem posts={sortPostsSelectAndInput} deletePost={delPost}/>
+      {isPostsLoading
+      ? <Loader/>
+      : <PostItem posts={sortPostsSelectAndInput} deletePost={delPost}/>
+      }
+      {postsErrors &&
+        <div>Произошла ошибка: {postsErrors}</div>
+      }
       <Pagination
         pagesAmount={pagesAmount}
         activePage={activePage}

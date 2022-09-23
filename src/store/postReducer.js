@@ -15,6 +15,6 @@ export const postReducer = (state = defaultState, action) => {
   }
 }
 
-export const getAllPosts = (payload) => ({type: 'GET_ALL_POSTS', payload})
-export const deletePost = (payload) => ({type: 'DELETE_POST', payload})
-export const createPost = (payload) => ({type: 'CREATE_POST', payload})
+export const getAllPostsAction = (payload) => ({type: 'GET_ALL_POSTS', payload})
+export const deletePostAction = (payload) => ({type: 'DELETE_POST', payload})
+export const createPostAction = (payload) => ({type: 'CREATE_POST', payload})
