@@ -14,7 +14,7 @@ import { pagesCounter } from "../utils/pagePagination";
 
 function Posts() {
 
-  const [postsLimit, setPostsLimit] = useState(10)  // кол-во статей на странице
+  const [postsLimit] = useState(10)  // кол-во статей на странице
   const [pagesAmount, setPagesAmount] = useState(10)  // кол-во страниц
   const [activePage, setActivePage] = useState(1)   // выбранная страница
 

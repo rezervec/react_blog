@@ -1,22 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../context/context";
 import style from './Navbar.module.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Context } from "../../../App";
 
 const Navbar = () => {
-  const {isAuth, setIsAuth} = useContext(AuthContext)
-
-  const logout = () => {
-    setIsAuth(false)
-    localStorage.removeItem('auth')
-  }
+  const {auth} = useContext(Context)
+  const [user] = useAuthState(auth)
 
   return (
     <ul className={style.navbar}>
       <li><Link to='/'>Статьи</Link></li>
       <li><Link to='/about'>О нас</Link></li>
-      {isAuth
-      ? <button onClick={logout}><Link to='/login'>Выйти</Link></button>
+      {user
+      ? <button onClick={() => auth.signOut()}><Link to='/login'>Выйти</Link></button>
       : <button><Link to='/login'>Войти</Link></button>
       }
     </ul>

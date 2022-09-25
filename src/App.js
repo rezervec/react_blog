@@ -1,29 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext } from "react";
 import './style/App.css';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/UI/navbar/Navbar";
-import {AuthContext} from './context/context'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
+import 'firebase/compat/auth'
 
+firebase.initializeApp({
+  apiKey: "yourData",
+  authDomain: "yourData",
+  projectId: "yourData",
+  storageBucket: "yourData",
+  messagingSenderId: "yourData",
+  appId: "yourData",
+  measurementId: "yourData"
+});
+
+export const Context = createContext(null)
+
+const auth = firebase.auth()
+const firestore = firebase.firestore()
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false)
-
-  useEffect(() => {
-    if(localStorage.getItem('auth'))
-      setIsAuth(true)
-  }, [])
-
   return (
-    <AuthContext.Provider value={{
-      isAuth,
-      setIsAuth
+    <Context.Provider value={{
+      firebase,
+      auth,
+      firestore
     }}>
       <BrowserRouter>
         <Navbar/>
         <AppRouter/>
       </BrowserRouter>
-    </AuthContext.Provider>
+    </Context.Provider>
   )
 }
 
